@@ -62,14 +62,77 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     }
 
     [data-theme="dark"] nav {
-      background: rgba(10, 10, 10, 0.85);
+      background: rgba(22, 22, 23, 0.72);
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    @keyframes chromaSlide {
+      0%   { background-position: 0% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    nav::before {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 10%;
+      right: 10%;
+      height: 12px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 80, 0.15),
+        rgba(255, 120, 0, 0.12),
+        rgba(0, 210, 120, 0.12),
+        rgba(0, 140, 255, 0.15),
+        rgba(100, 80, 255, 0.12),
+        transparent
+      );
+      background-size: 200% 100%;
+      animation: chromaSlide 8s linear infinite;
+      filter: blur(8px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] nav::before {
+      opacity: 0.7;
+      filter: blur(10px);
+    }
+
+    nav::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 0, 80, 0.4) 10%,
+        rgba(255, 120, 0, 0.35) 20%,
+        rgba(255, 220, 0, 0.3) 30%,
+        rgba(0, 210, 120, 0.35) 45%,
+        rgba(0, 140, 255, 0.4) 60%,
+        rgba(100, 80, 255, 0.35) 75%,
+        rgba(200, 50, 255, 0.3) 85%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: chromaSlide 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    [data-theme="dark"] nav::after {
+      opacity: 0.55;
     }
 
     .nav-brand {
